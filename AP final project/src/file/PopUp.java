@@ -54,5 +54,10 @@ public class PopUp {
 		return (String) JOptionPane.showInputDialog(null, text, DEFAULT_TITLE, DEFUALT_TYPE, null, null,
 				null);
 	}
-
+	public static void textMessage(String text,String title){
+		JOptionPane.showMessageDialog(null, text, title, DEFUALT_TYPE);
+	}
+	public static void textMessage(String text){
+		JOptionPane.showMessageDialog(null, text, DEFAULT_TITLE, DEFUALT_TYPE);
+	}
 }
