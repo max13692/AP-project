@@ -6,8 +6,7 @@ import javax.swing.JOptionPane;
  * We created this constructor to make it easier to make 
  * windows and not have to type a bunch of code each time.
  * ---------------------------
- * Written by:
- * Kyllan Wunder
+ * Written by: Kyllan Wunder
  * ---------------------------
  */
 public class PopUp {
