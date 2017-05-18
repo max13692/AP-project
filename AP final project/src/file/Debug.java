@@ -57,7 +57,9 @@ public class Debug {
 	 * 
 	 */
 	private static String getVarType(Object obj) {
+		if(obj != null)
 		return obj.getClass().getSimpleName();
+		return null;
 	}
 
 	/*
