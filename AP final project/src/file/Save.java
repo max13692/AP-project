@@ -1,8 +1,9 @@
 package file;
 
 public class Save {
-	public static void getSaves(){
-		
+	public static String getSaveText(int saveNum){
+		String s = "empty";
+		return "Save "+saveNum + " (" + s + ")";
 	}
 	
 	public static void setUpSaves(){
