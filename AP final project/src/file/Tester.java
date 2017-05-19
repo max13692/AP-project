@@ -48,7 +48,7 @@ public class Tester {
 				.substring(5, 6));
 		Debug.debug("saveNum", saveNum);
 		String name = PopUp.textInput("What's your name?");
-		
+		tutorial(name);
 	}
 
 	public static void help() {
@@ -68,4 +68,22 @@ public class Tester {
 		}
 	}
 
+	
+	public static void tutorial(String name) {
+		int selection = PopUp.buttonMessage("Have you played before "+name+ "? (and remeber how to play?)", new String[] {"Yes","No"});
+		if(selection == 0) {
+			//start game
+		}
+		else {
+			int num1 = PopUp.buttonMessage("You are abanoned on a island and need to surivive...", new String[] {"Cancle", "Wait what?", "Continue"});
+			Debug.debug("num1", num1);
+			if(num1 == 0) {start();}
+			PopUp.buttonMessage("You need to susrive as long as possible...", new String[] {"Cancle", "I'll try it", "How long?"});
+			if(num1 == 0) {start();}
+			PopUp.buttonMessage("You will have items you can use and tasks you can preform", new String[] {"Cancle", "Cool", "Uumm ok?"});
+			if(num1 == 0) {start();}
+		}
+			
+	}
+}
 }
