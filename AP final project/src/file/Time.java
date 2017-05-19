@@ -19,6 +19,7 @@ public class Time {
 	
 	public void addTime(int hours){
 		this.hours += hours;
+		updateTime();
 	}
 	private void updateTime(){
 		while(minutes > 60){
@@ -33,8 +34,9 @@ public class Time {
 		//end of game
 	}
 	}
-	public static void addTime(int hours, int minutes){
-		
-		
+	public void addTime(int hours, int minutes){
+		this.hours += hours;
+		this.minutes += minutes;
+		updateTime();
 	}
 }
