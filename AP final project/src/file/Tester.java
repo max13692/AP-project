@@ -3,6 +3,7 @@ package file;
 public class Tester {
 	public static void main(String args[]) {
 		Debug.debug("Strating program...");
+		Save.checkForSaves();
 		start();
 		Debug.debug("Reached end of main method.");
 	}
