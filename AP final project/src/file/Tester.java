@@ -27,9 +27,11 @@ public class Tester {
 			System.exit(0);
 			break;
 		case 0:
-
+			
 			break;
 		default:
+			Debug.error("Error, 'start' should not be this value. Going back to start...");
+			Debug.error("start",start);
 			start();
 			break;
 		}
@@ -45,7 +47,7 @@ public class Tester {
 				.substring(5, 6));
 		Debug.debug("saveNum", saveNum);
 		String name = PopUp.textInput("What's your name?");
-
+		
 	}
 
 	public static void help() {

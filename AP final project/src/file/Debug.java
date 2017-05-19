@@ -52,13 +52,45 @@ public class Debug {
 	}
 
 	/*
+	 * this error method is to debug variables. It takes in the variable name
+	 * and the variable object. It prints out the time, path, variable type,
+	 * variable name, and value. This is printed as an error in the console. You
+	 * need the sleep statement because the error statement won't print
+	 * instantly after class so it could take up to 5 ms.
+	 */
+	public static void error(String variableName, Object variable) {
+		System.err.println(getTime() + " " + getPath() + ": '" + getVarType(variable) + " " + variableName + " = "
+				+ variable + "'");
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
+			System.err.println("CRITICAL ERROR!!!!");
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * This error method is to keep track of what caused the error directly.
+	 * This prints the string directly to the console as a error. The sleep
+	 * statement is because the error message takes a few ms to print.
+	 */
+	public static void error(String text) {
+		System.err.println(getTime() + " " + getPath() + ": '" + text + "'");
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
+			System.err.println("CRITICAL ERROR!!!!");
+			e.printStackTrace();
+		}
+	}
+
+	/*
 	 * getVarType takes in an object then returns the type of variable as a
 	 * String.
-	 * 
 	 */
 	private static String getVarType(Object obj) {
-		if(obj != null)
-		return obj.getClass().getSimpleName();
+		if (obj != null)
+			return obj.getClass().getSimpleName();
 		return null;
 	}
 
@@ -80,4 +112,5 @@ public class Debug {
 	private static String getTime() {
 		return "(" + tf.format(System.currentTimeMillis()) + ")";
 	}
+
 }
