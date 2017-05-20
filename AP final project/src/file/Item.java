@@ -1,14 +1,15 @@
 package file;
 
 public class Item {
-	String name;
-	double attack, defence;
-	
-	public Item(String[] data){
+	private String name;
+	private double attack, defence;
+
+	public Item(String[] data) {
 		this.name = data[0];
 		this.attack = Integer.parseInt(data[1]);
 		this.defence = Integer.parseInt(data[2]);
 	}
+
 	public Item(String name, double attack, double defence) {
 		this.name = name;
 		this.attack = attack;

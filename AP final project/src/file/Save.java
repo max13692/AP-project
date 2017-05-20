@@ -41,4 +41,18 @@ public class Save {
 	public static void saveData() {
 
 	}
+	
+	/*public static String[][] getMatrixFromFile(String fileName){
+		String matrix[][] = null;
+		try {
+			
+			Debug.debug("Created save files.");
+		} catch (IOException e) {
+			Debug.error("error creating save files.");
+			e.printStackTrace();
+			return null;
+		}
+		return matrix;
+	}
+	*/
 }
