@@ -34,7 +34,7 @@ public class Time {
 			gameover = true;
 		}
 	}
-//TEST
+
 	public boolean isGameover() {
 		return gameover;
 	}
