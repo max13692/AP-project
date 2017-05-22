@@ -75,22 +75,7 @@ public class Tester {
 			// start game
 		} else {
 			Debug.debug("Opening tutorial...");
-			String[][] tutorial = {
-					{ "You are abanoned on a island and need to surivive...", "Cancel", "Wait what?", "Continue", "" },
-					{ "You need to susrive as long as possible...", "Cancel", "How long?", "I'll try it",
-							"You will need to surivive a year to win the game" },
-					{ "You will have items you can use and tasks you can preform", "Cancel", "Uumm ok?", "Cool",
-							"Items will allow you to directly effect your stats. While actions will indirectly effect them" },
-					{ "You will also have health, hunger, thirst, and snaity stats you need to watch...", "Cancel",
-							"What do those do?", "Sounds good",
-							"Your stats will determin if your healthly or not and when they drop to low you could die..." },
-					{ "keep all the levels up and you should be good...", "Cancel", "What if I don't?", "OK",
-							"You can die if your heath gets to low." },
-					{ "Watch out something might try to attact you...", "Cancel", "Could I die?", "Oh ok",
-							"Yes attacks can and will kill you" },
-					{ "Make sure to get enough sleep or you'll go insane...", "Cancel", "What if I already am?",
-							"I will sleep enough",
-							"You should get checked out if your insaine... but I'm no doctor" } };
+			String[][] tutorial = Save.getMatrixFromFile("Data/tutorial.txt");
 			for (int i = 0; i < tutorial.length; i++) {
 				int num = PopUp.buttonMessage(tutorial[i][0],
 						new String[] { tutorial[i][1], tutorial[i][2], tutorial[i][3] });
@@ -105,7 +90,6 @@ public class Tester {
 				} else if (num == -1) {
 					Debug.debug("User has clicked the x button... Closing program...");
 					System.exit(0);
-
 				}
 			}
 		}
