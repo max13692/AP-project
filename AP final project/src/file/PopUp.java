@@ -58,4 +58,6 @@ public class PopUp {
 	public static void textMessage(String text) {
 		JOptionPane.showMessageDialog(null, text, DEFAULT_TITLE, DEFUALT_TYPE);
 	}
+
+
 }

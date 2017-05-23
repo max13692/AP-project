@@ -41,15 +41,17 @@ public class Tester {
 	public static void startMenu() {
 		Debug.debug("Starting the game.");
 		Debug.debug("Opening saves menu...");
-		int saveNum = Integer.parseInt(PopUp
-				.dropDownMessage("Choose a save:", "Saves",
-						new String[] { Save.getSaveText(1), Save.getSaveText(2), Save.getSaveText(3) })
-				.substring(5, 6));
-		Debug.debug("saveNum", saveNum);
-		String name = PopUp.textInput("What's your name?");
-		if (name != null)
-			tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()));
-		else
+		String text = PopUp.dropDownMessage("Choose a save:", "Saves",
+				new String[] { Save.getSaveText(1), Save.getSaveText(2), Save.getSaveText(3) });
+		if (text != null) {
+			int saveNum = Integer.parseInt(text.substring(5, 6));
+			Debug.debug("saveNum", saveNum);
+			String name = PopUp.textInput("What's your name?");
+			if (name != null)
+				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()));
+			else
+				start();
+		} else
 			start();
 	}
 
@@ -74,7 +76,7 @@ public class Tester {
 		int selection = PopUp.buttonMessage("Have you played before " + name + "? (and remeber how to play?)",
 				new String[] { "Yes", "No" });
 		if (selection == 0) {
-			// start game
+			Game.startGame(new Player(name));
 		} else {
 			Debug.debug("Opening tutorial...");
 			String[][] tutorial = Save.getMatrixFromFile("Data/tutorial.txt");
@@ -86,6 +88,7 @@ public class Tester {
 				if (num == 0) {
 					Debug.debug("User has canceled tutorial...");
 					start();
+					break;
 				} else if (num == 1) {
 					Debug.debug("User wanted to see more information.");
 					PopUp.textMessage(tutorial[i][4]);
@@ -94,7 +97,7 @@ public class Tester {
 					System.exit(0);
 				}
 			}
-			// Start game
+			Game.startGame(new Player(name));
 		}
 	}
 }
