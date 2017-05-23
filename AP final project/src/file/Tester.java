@@ -3,7 +3,6 @@ package file;
 public class Tester {
 	public static void main(String args[]) {
 		Debug.debug("Strating program...");
-		Save.checkForSaves();
 		start();
 		Debug.debug("Reached end of main method.");
 	}
@@ -42,13 +41,18 @@ public class Tester {
 	public static void startMenu() {
 		Debug.debug("Starting the game.");
 		Debug.debug("Opening saves menu...");
-		int saveNum = Integer.parseInt(PopUp
-				.dropDownMessage("Choose a save:", "Saves",
-						new String[] { Save.getSaveText(1), Save.getSaveText(2), Save.getSaveText(3) })
-				.substring(5, 6));
-		Debug.debug("saveNum", saveNum);
-		String name = PopUp.textInput("What's your name?");
-		tutorial(name);
+		String text = PopUp.dropDownMessage("Choose a save:", "Saves",
+				new String[] { Save.getSaveText(1), Save.getSaveText(2), Save.getSaveText(3) });
+		if (text != null) {
+			int saveNum = Integer.parseInt(text.substring(5, 6));
+			Debug.debug("saveNum", saveNum);
+			String name = PopUp.textInput("What's your name?");
+			if (name != null)
+				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()));
+			else
+				start();
+		} else
+			start();
 	}
 
 	public static void help() {
@@ -72,25 +76,10 @@ public class Tester {
 		int selection = PopUp.buttonMessage("Have you played before " + name + "? (and remeber how to play?)",
 				new String[] { "Yes", "No" });
 		if (selection == 0) {
-			// start game
+			Game.startGame(new Player(name));
 		} else {
 			Debug.debug("Opening tutorial...");
-			String[][] tutorial = {
-					{ "You are abanoned on a island and need to surivive...", "Cancel", "Wait what?", "Continue", "" },
-					{ "You need to susrive as long as possible...", "Cancel", "How long?", "I'll try it",
-							"You will need to surivive a year to win the game" },
-					{ "You will have items you can use and tasks you can preform", "Cancel", "Uumm ok?", "Cool",
-							"Items will allow you to directly effect your stats. While actions will indirectly effect them" },
-					{ "You will also have health, hunger, thirst, and snaity stats you need to watch...", "Cancel",
-							"What do those do?", "Sounds good",
-							"Your stats will determin if your healthly or not and when they drop to low you could die..." },
-					{ "keep all the levels up and you should be good...", "Cancel", "What if I don't?", "OK",
-							"You can die if your heath gets to low." },
-					{ "Watch out something might try to attact you...", "Cancel", "Could I die?", "Oh ok",
-							"Yes attacks can and will kill you" },
-					{ "Make sure to get enough sleep or you'll go insane...", "Cancel", "What if I already am?",
-							"I will sleep enough",
-							"You should get checked out if your insaine... but I'm no doctor" } };
+			String[][] tutorial = Save.getMatrixFromFile("Data/tutorial.txt");
 			for (int i = 0; i < tutorial.length; i++) {
 				int num = PopUp.buttonMessage(tutorial[i][0],
 						new String[] { tutorial[i][1], tutorial[i][2], tutorial[i][3] });
@@ -99,15 +88,16 @@ public class Tester {
 				if (num == 0) {
 					Debug.debug("User has canceled tutorial...");
 					start();
+					break;
 				} else if (num == 1) {
 					Debug.debug("User wanted to see more information.");
 					PopUp.textMessage(tutorial[i][4]);
 				} else if (num == -1) {
 					Debug.debug("User has clicked the x button... Closing program...");
 					System.exit(0);
-
 				}
 			}
+			Game.startGame(new Player(name));
 		}
 	}
 }
