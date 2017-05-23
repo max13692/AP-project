@@ -28,7 +28,7 @@ public class Tester {
 			System.exit(0);
 			break;
 		case 0:
-
+			
 			break;
 		default:
 			Debug.error("Error, 'start' should not be this value. Going back to start...");
