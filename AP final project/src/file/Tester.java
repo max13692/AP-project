@@ -3,7 +3,6 @@ package file;
 public class Tester {
 	public static void main(String args[]) {
 		Debug.debug("Strating program...");
-		Save.checkForSaves();
 		start();
 		Debug.debug("Reached end of main method.");
 	}
@@ -48,7 +47,10 @@ public class Tester {
 				.substring(5, 6));
 		Debug.debug("saveNum", saveNum);
 		String name = PopUp.textInput("What's your name?");
-		tutorial(name);
+		if (name != null)
+			tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()));
+		else
+			start();
 	}
 
 	public static void help() {
@@ -92,6 +94,7 @@ public class Tester {
 					System.exit(0);
 				}
 			}
+			// Start game
 		}
 	}
 }
