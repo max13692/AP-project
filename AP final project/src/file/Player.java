@@ -7,6 +7,7 @@ public class Player {
 	private double health, hunger, sanity, thirst;
 	private Time time;
 	private ArrayList<Item> items;
+	private int gold;
 
 	public Player(String name) {
 		playerName = name;
@@ -14,6 +15,7 @@ public class Player {
 		hunger = 100;
 		sanity = 100;
 		thirst = 100;
+		gold = 0;
 		time = new Time();
 		items = new ArrayList<Item>();
 	}
@@ -93,9 +95,9 @@ public class Player {
 	public String[][] getData() {
 		return null;
 	}
-	
+
 	public String toString() {
-		return "Health: " + health + "/nHunger: " + hunger + "/nSanity: " + sanity + "/nThirst: " + thirst;
-		
+		return "Health: " + health + "/nHunger: " + hunger + "/nSanity: "
+				+ sanity + "/nThirst: " + thirst;
 	}
 }

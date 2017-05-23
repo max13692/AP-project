@@ -2,11 +2,18 @@ package file;
 
 public class Tester {
 	public static void main(String args[]) {
+		Debug.debug("Starting test");
+		test();
+		Debug.debug("Ending test");
 		Debug.debug("Strating program...");
 		start();
 		Debug.debug("Reached end of main method.");
 	}
 
+	private static void test() {
+		
+	}
+	
 	public static void start() {
 		Debug.debug("Opening Start menu...");
 		int start = PopUp.buttonMessage("Welcome to the game", new String[] { "Extra", "Close", "Help", "Start" });
