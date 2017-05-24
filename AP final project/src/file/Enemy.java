@@ -2,13 +2,14 @@ package file;
 
 public class Enemy {
 	private String name;
-	private double health, attack;
+	private double health, attack, defense;
 	private int level;
 
-	public Enemy(String name, double health, double attack, int level) {
+	public Enemy(String name, double health, double attack, double defense, int level) {
 		this.name = name;
 		this.health = health;
 		this.attack = attack;
+		this.defense = defense;
 		this.level = level;
 	}
 
@@ -19,14 +20,22 @@ public class Enemy {
 	public double getHealth() {
 		return health;
 	}
-	
-	public void addHealth(double heal) {
-		health += heal;
+
+	public String takeDamamge(double amount) {
+		if (amount >= 0)
+			return null;
+		double damage = amount-Math.round((Math.random() * (defense+1)));
+		health -= damage; 
+		return "You hit " + name + " for " + damage;
 	}
-	public void updateHealth() {
-		if(health < 0)
-			health = 0;
+
+	public boolean addHealth(double amount) {
+		if (amount <= 0)
+			return false;
+		health -= amount;
+		return true;
 	}
+
 	public int getLevel() {
 		return level;
 	}
@@ -34,8 +43,8 @@ public class Enemy {
 	public boolean isDead() {
 		return health <= 0;
 	}
+
 	public String toString() {
-		return "This " + name + " has a health of " + health
-				+ " and an attack of " + attack + ".";
+		return name + " (Level: " + level + ")";
 	}
 }
