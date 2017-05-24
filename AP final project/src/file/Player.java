@@ -41,13 +41,14 @@ public class Player {
 		return true;
 	}
 
-	public boolean subtractHealth(int health) {
+	public String takeDamage(int health) {
 		if (this.health == 0 || health <= 0)
-			return false;
-		this.health += health;
+			return null;
+		double damage = health-Math.round((Math.random() * getDefualtItem().getDefence()+1));
+		this.health -= health;
 		if (this.health < 0)
 			this.health = 0;
-		return true;
+		return "You took for '" + damage + "' you have '" +health + "hp'";
 	}
 
 	public double getHealth() {
@@ -66,7 +67,7 @@ public class Player {
 	public boolean subtractHunger(int hunger) {
 		if (this.hunger == 0 || hunger <= 0)
 			return false;
-		this.hunger += hunger;
+		this.hunger -= hunger;
 		if (this.hunger < 0)
 			this.hunger = 0;
 		return true;
@@ -88,7 +89,7 @@ public class Player {
 	public boolean subtractThirst(int thirst) {
 		if (this.thirst == 0 || thirst <= 0)
 			return false;
-		this.thirst += thirst;
+		this.thirst -= thirst;
 		if (this.thirst < 0)
 			this.thirst = 0;
 		return true;
@@ -110,7 +111,7 @@ public class Player {
 	public boolean subtractSanity(int sanity) {
 		if (this.sanity == 0 || sanity <= 0)
 			return false;
-		this.sanity += sanity;
+		this.sanity -= sanity;
 		if (this.sanity < 0)
 			this.sanity = 0;
 		return true;
@@ -132,7 +133,7 @@ public class Player {
 	public boolean subtractGold(int gold) {
 		if (this.gold == 0 || gold <= 0)
 			return false;
-		this.gold += gold;
+		this.gold -= gold;
 		if (this.gold < 0)
 			this.gold = 0;
 		return true;
