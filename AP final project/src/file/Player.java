@@ -117,7 +117,7 @@ public class Player {
 		return true;
 	}
 
-	public double getsanity() {
+	public double getSanity() {
 		return sanity;
 	}
 
