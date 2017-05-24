@@ -45,10 +45,10 @@ public class Player {
 		if (this.health == 0 || health <= 0)
 			return null;
 		double damage = health-Math.round((Math.random() * getDefualtItem().getDefence()+1));
-		this.health -= health;
+		this.health -= damage;
 		if (this.health < 0)
 			this.health = 0;
-		return "You took for '" + damage + "' you have '" +health + "hp'";
+		return "You took for '" + damage + "' you have '" + this.health + "hp'";
 	}
 
 	public double getHealth() {
