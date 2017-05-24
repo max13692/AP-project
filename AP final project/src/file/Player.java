@@ -147,7 +147,10 @@ public class Player {
 		if (exp <= 0)
 			return false;
 		this.exp += exp;
-		// Check for level up (Add this kyllan)
+		if(exp >= (level+1)*2) {
+			level++;
+			exp -= (level+1)*2;
+		}
 		return true;
 	}
 

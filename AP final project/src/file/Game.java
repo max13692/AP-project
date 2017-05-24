@@ -68,6 +68,6 @@ public class Game {
 	}
 	
 	private static void actions() {
-		
+		PopUp.dropDownMessage("What would you like to do?", new String[] {"Sleep", "Explore", "Eat", "Cancel"});
 	}
 }
