@@ -5,15 +5,16 @@ public class Game {
 
 	public static void startGame(Player p) {
 		player = p;
-		Debug.debug("player",player);
+		Debug.debug("player", player);
 		Debug.debug("Starting game.");
 		gameMenu();
 	}
 
 	private static void gameMenu() {
-		int game = PopUp.buttonMessage("What do you want to do?", new String[] {"Quit","View Stats", "Open Shop","Actions"});
+		int game = PopUp.buttonMessage("What do you want to do?", new String[] {
+				"Quit", "View Stats", "Open Shop", "Actions" });
 		Debug.debug("game", game);
-		switch(game) {
+		switch (game) {
 		case -1:
 			Debug.debug("Closing program...");
 			quitGame();
@@ -40,25 +41,33 @@ public class Game {
 			gameMenu();
 		}
 	}
-	private static String getBar(int amount){
+
+	private static String getBar(int amount) {
 		String bar = "";
 		final char BAR_CHAR = '|';
 		final int AMOUNT_PER_CHAR = 5;
-		for(int i =0; i < amount/AMOUNT_PER_CHAR;i++)
-			bar += BAR_CHAR+"";
-			return bar;
+		for (int i = 0; i < amount / AMOUNT_PER_CHAR; i++)
+			bar += BAR_CHAR + "";
+		return bar;
 	}
+
 	private static void userMenu(int menuNum) {
-		Debug.debug("menuNum",menuNum);
+		Debug.debug("menuNum", menuNum);
 		switch (menuNum) {
 		case 1:
-			int stats = PopUp.buttonMessage("Health:  "+ getBar((int)player.getHealth()) + "\nHunger: " +getBar((int)player.getHunger())  +"\nThirst:   " + getBar((int)player.getHunger()) + "\nSanity:   " + getBar((int)player.getSanity()) +"\nWeapon: " + player.getDefualtItem()  ,"stats", new String[]{"Change wepeon","Go back"});
-			Debug.debug("stats",stats);
-			if(stats == -1)
+			int stats = PopUp.buttonMessage(
+					"Health:  " + getBar((int) player.getHealth())
+							+ "\nHunger: " + getBar((int) player.getHunger())
+							+ "\nThirst:   " + getBar((int) player.getHunger())
+							+ "\nSanity:   " + getBar((int) player.getSanity())
+							+ "\nWeapon: " + player.getDefualtItem(), "stats",
+					new String[] { "Change wepeon", "Go back" });
+			Debug.debug("stats", stats);
+			if (stats == -1)
 				quitGame();
-			else if(stats == 0)
+			else if (stats == 0)
 				userMenu(2);
-			else if(stats == 1)
+			else if (stats == 1)
 				gameMenu();
 			break;
 		case 2:
@@ -81,17 +90,40 @@ public class Game {
 			Debug.error("This should not have this number.");
 		}
 	}
-	
+
 	private static void shop() {
-		
-		
-		
+		String matrix[][] = { 
+				{ "I", "Wood Sword", "1.5", "1", "20" },
+				{ "I", "2x4", "2.5", "1.75", "35"},
+				{ "I", "Hammer", "5", "2", "50" },
+				{ "I", "Chainsaw", "15", "5", "400"},
+				{ "I", "Diamond Sword", "25", "10", "550"},
+				{ "I", "Energy Sword", "100", "50", "1000"},
+				{ "I", "Heavenly Sword", "1000", "200", "5000"},
+				{ "I", "Tactical Nuke", "10000000", "0", "1000000"},
+				{ "F", "Pork", "20", "75" },
+				{ "F", "Bread", "10", "50" },
+				{ "F", "Apple", "5", "15" },
+				{ "D", "Water", "15", "50" },
+				{ "D", "Beer", "25", "100" },
+				{ "D", "Apple Cyder", "15", "50" },
+				{ "P", "Sanity Potion", "5", "-5", "50", "-5", "150" }, 
+				{ "P", "Heal Potion", "50", "5", "-5", "5", "150" },
+				{ "P", "Ultimate Potion", "25", "25", "25", "25", "350" } };
+
 	}
-	
+
+	// is this an item?
+	// What is the name
+	// Stats (what does this do)
+	// How many times can you buy it?
+
 	private static void actions() {
-		PopUp.dropDownMessage("What would you like to do?", new String[] {"Sleep", "Explore", "Eat", "Cancel"});
+		PopUp.dropDownMessage("What would you like to do?", new String[] {
+				"Sleep", "Explore", "Eat", "Cancel" });
 	}
-	private static void quitGame(){
+
+	private static void quitGame() {
 		Debug.debug("Closing game...");
 		Debug.debug("Saving game...");
 		Debug.debug("Finnished saving game.");
