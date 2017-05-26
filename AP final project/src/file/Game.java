@@ -110,14 +110,11 @@ public class Game {
 				{ "P", "Sanity Potion", "5", "-5", "50", "-5", "150" }, 
 				{ "P", "Heal Potion", "50", "5", "-5", "5", "150" },
 				{ "P", "Ultimate Potion", "25", "25", "25", "25", "350" } };
+		//Split up shop into different parts?
 
 	}
 
-	// is this an item?
-	// What is the name
-	// Stats (what does this do)
-	// How many times can you buy it?
-
+	
 	private static void actions() {
 		PopUp.dropDownMessage("What would you like to do?", new String[] {
 				"Sleep", "Explore", "Eat", "Cancel" });
