@@ -111,7 +111,28 @@ public class Game {
 				{ "P", "Heal Potion", "50", "5", "-5", "5", "150" },
 				{ "P", "Ultimate Potion", "25", "25", "25", "25", "350" } };
 		//Split up shop into different parts?
-
+		int shop = PopUp.buttonMessage("Welcome to the shopping district. Where would you like to shop?", new String[]{"Go Back","Witch Hut","Bar","Grocery Store","Weapon Shop"});
+	Debug.debug("shop",shop);
+		switch (shop) {
+	case 4:
+		break;
+	case 3:
+		
+		break;
+	case 2:
+		
+		break;
+	case 1:
+		
+		break;
+	case 0:
+		gameMenu();
+		break;
+	case -1:
+		quitGame();
+	default:
+		break;
+	}
 	}
 
 	
