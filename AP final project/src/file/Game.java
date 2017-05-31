@@ -107,7 +107,6 @@ public class Game {
 
 	private static void shop() {
 		String matrix[][] = Save.getMatrixFromFile("saves/shop.txt");
-		//Split up shop into different parts?
 		int shop = PopUp.buttonMessage("Welcome to the shopping district. Where would you like to shop?", new String[]{"Go Back","Witch Hut","Bar","Grocery Store","Weapon Shop"});
 	Debug.debug("shop",shop);
 		switch (shop) {
