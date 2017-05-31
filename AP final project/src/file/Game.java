@@ -85,7 +85,34 @@ public class Game {
 				gameMenu();
 			break;
 		case 2:
-			// user menu 2
+			String list[] = new String[player.getItems().size()];
+			for (int i = 0; i < player.getItems().size(); i++)
+				list[i] = player.getItem(i).toString();
+			String item = PopUp.dropDownMessage(
+					"Choose a weapon to use as your main weapon.", list);
+			for (int i = 0; i < list.length; i++)
+				if (list[i].equals(item)) {
+					player.setDefaultItem(i);
+					break;
+				}
+			int numWeapon = PopUp.buttonMessage("Your new default weapon is "
+					+ player.getDefualtItem() + ".", new String[] { "Cancel",
+					"Conform" });
+			Debug.debug("numWeapon", numWeapon);
+			switch (numWeapon) {
+			case -1:
+				quitGame();
+				break;
+			case 0:
+				userMenu(2);
+				break;
+			case 1:
+				gameMenu();
+				break;
+			default:
+				Debug.debug("numWeapon", numWeapon);
+				break;
+			}
 			break;
 		case 3:
 			// user menu 3
