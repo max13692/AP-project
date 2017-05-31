@@ -1,5 +1,7 @@
 package file;
 
+import java.util.ArrayList;
+
 public class Game {
 	public static Player player = null;
 
@@ -104,14 +106,56 @@ public class Game {
 			Debug.error("This should not have this number.");
 		}
 	}
-
+	private static String[] getShopData(String matrix[][], String type){
+		ArrayList<String> shopData = new ArrayList<String>();
+		for(int i = 0; i < matrix.length; i++)
+			if(matrix[i][0].equals(type))
+				shopData.add(matrix[i][1] + " (" + matrix[i][4] + " gold)");
+		String arr[] = new String[shopData.size()];
+		for(int i =0 ; i< arr.length;i++)
+			arr[i] = shopData.get(i);
+		return arr;
+	}
+	private static int getLocation(String matrix[][], String item){
+		for(int i =0; i < matrix.length;i++)
+			if(item.equals(matrix[i][1]))
+				return i;
+		return -1;
+	}
 	private static void shop() {
 		String matrix[][] = Save.getMatrixFromFile("Data/shop.txt");
 		int shop = PopUp.buttonMessage("Welcome to the shopping district. Where would you like to shop?", new String[]{"Go Back","Witch Hut","Bar","Grocery Store","Weapon Shop"});
 	Debug.debug("shop",shop);
 		switch (shop) {
 	case 4:
-		
+		String shopItems[] = getShopData(matrix, "I");
+		String selection = PopUp.dropDownMessage("Welcome to the weapons shop. What can I get for you?", shopItems);
+		Debug.debug("selection", selection);
+		if(selection == null)
+			shop();
+		selection = selection.substring(0,selection.indexOf("(")-1);
+		Debug.debug("selection", selection);
+		Debug.debug("Checking if player has item.");
+		ArrayList<Item> playerWeapons = player.getItems();
+		boolean hasWeapon = false;
+		for(int i = 0; i < playerWeapons.size();i++)
+			if(playerWeapons.get(i).toString().substring(0,playerWeapons.get(i).toString().indexOf("(")-1).equals(selection)){
+				hasWeapon = true;
+				break;
+			}
+		Debug.debug("Getting item price");
+		int location = getLocation(matrix, selection);
+		int cost = Integer.parseInt(matrix[location][4]);
+		if(cost > player.getGold())
+			PopUp.textInput("You don't have enough gold.");
+		else if(hasWeapon)
+			PopUp.textInput("You already have this weapon.");
+		else {
+			player.subtractGold(cost);
+			player.addItem(new Item(matrix[location][1],Integer.parseInt(matrix[location][2]),Integer.parseInt(matrix[location][3])));
+			PopUp.textMessage("Weapon Bought");
+		}
+		shop();
 		break;
 	case 3:
 		
