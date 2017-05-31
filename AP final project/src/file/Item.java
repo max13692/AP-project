@@ -5,9 +5,15 @@ public class Item {
 	private double attack, defence;
 
 	public Item(String[] data) {
+		try{
 		this.name = data[0];
 		this.attack = Integer.parseInt(data[1]);
 		this.defence = Integer.parseInt(data[2]);
+		}
+		catch(NumberFormatException e){
+			Debug.error("Error trying to initialize item.");
+			Debug.error(e.getMessage());
+		}
 	}
 
 	public Item(String name, double attack, double defence) {

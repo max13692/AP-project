@@ -42,9 +42,12 @@ public class Player {
 	}
 
 	public String takeDamage(int health) {
-		if (this.health == 0 || health <= 0)
+		Debug.debug("health",health);
+		if (this.health == 0 || health <= 0){
+			Debug.error("Error with takeDamage");
 			return null;
-		double damage = health-Math.round((Math.random() * getDefualtItem().getDefence()+1));
+		}
+		double damage = health - Math.round((Math.random() * getDefualtItem().getDefence() + 1));
 		this.health -= damage;
 		if (this.health < 0)
 			this.health = 0;
@@ -147,11 +150,16 @@ public class Player {
 		if (exp <= 0)
 			return false;
 		this.exp += exp;
-		if(exp >= (level+1)*2) {
+		if (exp >= getRequiredExp()) {
 			level++;
-			exp -= (level+1)*2;
+			exp -= getRequiredExp();
 		}
 		return true;
+	}
+
+	public int getRequiredExp() {
+		return (int) (level + 2) * 25;
+
 	}
 
 	public int getExp() {
