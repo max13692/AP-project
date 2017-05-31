@@ -77,7 +77,7 @@ public class Save {
 	}
 
 	public static String[][] getMatrixFromFile(String fileName) {
-		String tempMatrix[][] = new String[10][30];
+		String tempMatrix[][] = new String[50][50];
 		String text = getTextFromFile(fileName);
 		Debug.debug("text", text);
 		Debug.debug("Got text from save files.");

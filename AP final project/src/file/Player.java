@@ -17,7 +17,7 @@ public class Player {
 		hunger = 100;
 		sanity = 100;
 		thirst = 100;
-		gold = 0;
+		gold = 100;
 		time = new Time();
 		items = new ArrayList<Item>();
 		items.add(new Item("Wood sword", 1, 1));
