@@ -63,6 +63,20 @@ public class Game {
 							+ "\nWeapon: " + player.getDefualtItem(), "stats",
 					new String[] { "Change wepeon", "Go back" });
 			Debug.debug("stats", stats);
+			switch(stats){
+			case -1:
+				
+				break;
+			case 0:
+				
+				break;
+			case 1:
+				
+				break;
+				default:
+					
+					break;
+			}
 			if (stats == -1)
 				quitGame();
 			else if (stats == 0)
@@ -92,29 +106,13 @@ public class Game {
 	}
 
 	private static void shop() {
-		String matrix[][] = { 
-				{ "I", "Wood Sword", "1.5", "1", "20" },
-				{ "I", "2x4", "2.5", "1.75", "35"},
-				{ "I", "Hammer", "5", "2", "50" },
-				{ "I", "Chainsaw", "15", "5", "400"},
-				{ "I", "Diamond Sword", "25", "10", "550"},
-				{ "I", "Energy Sword", "100", "50", "1000"},
-				{ "I", "Heavenly Sword", "1000", "200", "5000"},
-				{ "I", "Tactical Nuke", "10000000", "0", "1000000"},
-				{ "F", "Pork", "20", "75" },
-				{ "F", "Bread", "10", "50" },
-				{ "F", "Apple", "5", "15" },
-				{ "D", "Water", "15", "50" },
-				{ "D", "Beer", "25", "100" },
-				{ "D", "Apple Cyder", "15", "50" },
-				{ "P", "Sanity Potion", "5", "-5", "50", "-5", "150" }, 
-				{ "P", "Heal Potion", "50", "5", "-5", "5", "150" },
-				{ "P", "Ultimate Potion", "25", "25", "25", "25", "350" } };
+		String matrix[][] = Save.getMatrixFromFile("saves/shop.txt");
 		//Split up shop into different parts?
 		int shop = PopUp.buttonMessage("Welcome to the shopping district. Where would you like to shop?", new String[]{"Go Back","Witch Hut","Bar","Grocery Store","Weapon Shop"});
 	Debug.debug("shop",shop);
 		switch (shop) {
 	case 4:
+		
 		break;
 	case 3:
 		
