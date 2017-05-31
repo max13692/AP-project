@@ -95,24 +95,7 @@ public class Game {
 					player.setDefaultItem(i);
 					break;
 				}
-			int numWeapon = PopUp.buttonMessage("Your new default weapon is "
-					+ player.getDefualtItem() + ".", new String[] { "Cancel",
-					"Conform" });
-			Debug.debug("numWeapon", numWeapon);
-			switch (numWeapon) {
-			case -1:
-				quitGame();
-				break;
-			case 0:
-				userMenu(2);
-				break;
-			case 1:
-				gameMenu();
-				break;
-			default:
-				Debug.debug("numWeapon", numWeapon);
-				break;
-			}
+			userMenu(1);
 			break;
 		case 3:
 			// user menu 3
@@ -182,8 +165,8 @@ public class Game {
 				PopUp.textInput("You already have this weapon.");
 			else {
 				player.subtractGold(cost);
-				player.addItem(new Item(matrix[location][1], Integer.parseInt(matrix[location][2]),
-						Integer.parseInt(matrix[location][3])));
+				player.addItem(new Item(matrix[location][1], Double.parseDouble(matrix[location][2]),
+						Double.parseDouble(matrix[location][3])));
 				PopUp.textMessage("Weapon Bought");
 			}
 			shop();
