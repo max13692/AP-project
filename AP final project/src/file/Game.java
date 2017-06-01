@@ -231,7 +231,10 @@ public class Game {
 				PopUp.textInput("You don't have enough gold.");
 			else {
 				player.subtractGold(cost);
-				//Add in potion system
+				player.addHealth(Integer.parseInt(matrix[location][2]));
+				player.addThirst(Integer.parseInt(matrix[location][3]));
+				player.addSanity(Integer.parseInt(matrix[location][4]));
+				player.addHunger(Integer.parseInt(matrix[location][5]));
 				PopUp.textMessage("hehe enojoy");
 			}
 			break;
