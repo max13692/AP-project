@@ -116,11 +116,11 @@ public class Game {
 		}
 	}
 
-	private static String[] getShopData(String matrix[][], String type) {
+	private static String[] getShopData(String matrix[][], String type, int col) {
 		ArrayList<String> shopData = new ArrayList<String>();
 		for (int i = 0; i < matrix.length; i++)
 			if (matrix[i][0].equals(type))
-				shopData.add(matrix[i][1] + " (" + matrix[i][4] + " gold)");
+				shopData.add(matrix[i][1] + " (" + matrix[i][col] + " gold)");
 		String arr[] = new String[shopData.size()];
 		for (int i = 0; i < arr.length; i++)
 			arr[i] = shopData.get(i);
@@ -139,18 +139,22 @@ public class Game {
 		int shop = PopUp.buttonMessage("Welcome to the shopping district. Where would you like to shop?",
 				new String[] { "Go Back", "Witch Hut", "Bar", "Grocery Store", "Weapon Shop" });
 		Debug.debug("shop", shop);
+		String[] shopItems = null;
+		String selection = null;
+		ArrayList<Item> playerWeapons = player.getItems();
+		boolean hasWeapon = false;
+		int location = 0;
+		int cost = 0;
 		switch (shop) {
 		case 4:
-			String shopItems[] = getShopData(matrix, "I");
-			String selection = PopUp.dropDownMessage("Welcome to the weapons shop. What can I get for you?", shopItems);
+			shopItems = getShopData(matrix, "I", 4);
+			selection = PopUp.dropDownMessage("Welcome to the weapons shop. What can I get for you?", shopItems);
 			Debug.debug("selection", selection);
 			if (selection == null)
 				shop();
 			selection = selection.substring(0, selection.indexOf("(") - 1);
 			Debug.debug("selection", selection);
 			Debug.debug("Checking if player has item.");
-			ArrayList<Item> playerWeapons = player.getItems();
-			boolean hasWeapon = false;
 			for (int i = 0; i < playerWeapons.size(); i++)
 				if (playerWeapons.get(i).toString().substring(0, playerWeapons.get(i).toString().indexOf("(") - 1)
 						.equals(selection)) {
@@ -158,8 +162,8 @@ public class Game {
 					break;
 				}
 			Debug.debug("Getting item price");
-			int location = getLocation(matrix, selection);
-			int cost = Integer.parseInt(matrix[location][4]);
+			location = getLocation(matrix, selection);
+			cost = Integer.parseInt(matrix[location][4]);
 			if (cost > player.getGold())
 				PopUp.textInput("You don't have enough gold.");
 			else if (hasWeapon)
@@ -170,16 +174,66 @@ public class Game {
 						Double.parseDouble(matrix[location][3])));
 				PopUp.textMessage("Weapon Bought");
 			}
-			shop();
 			break;
 		case 3:
-
+			shopItems = getShopData(matrix, "F", 3);
+			selection = PopUp.dropDownMessage("Welcome to the Grocery Store! What would you like?", shopItems);
+			Debug.debug("selection", selection);
+			if (selection == null)
+				shop();
+			selection = selection.substring(0, selection.indexOf("(") - 1);
+			Debug.debug("selection", selection);
+			location = getLocation(matrix, selection);
+			Debug.debug("locaiton", location);
+			cost = Integer.parseInt(matrix[location][3]);
+			Debug.debug("cost", cost);
+			if (cost > player.getGold())
+				PopUp.textInput("You don't have enough gold.");
+			else {
+				player.subtractGold(cost);
+				player.addHunger(Integer.parseInt(matrix[location][2]));
+				PopUp.textMessage("Enjoy your food!");
+			}
 			break;
 		case 2:
-
+			shopItems = getShopData(matrix, "D", 3);
+			selection = PopUp.dropDownMessage("Welcome to the bar! What can I serve ya today?", shopItems);
+			Debug.debug("selection", selection);
+			if (selection == null)
+				shop();
+			selection = selection.substring(0, selection.indexOf("(") - 1);
+			Debug.debug("selection", selection);
+			location = getLocation(matrix, selection);
+			Debug.debug("locaiton", location);
+			cost = Integer.parseInt(matrix[location][3]);
+			Debug.debug("cost", cost);
+			if (cost > player.getGold())
+				PopUp.textInput("You don't have enough gold.");
+			else {
+				player.subtractGold(cost);
+				player.addThirst(Integer.parseInt(matrix[location][2]));
+				PopUp.textMessage("Enjoy your drink!");
+			}
 			break;
 		case 1:
-
+			shopItems = getShopData(matrix, "P", 6);
+			selection = PopUp.dropDownMessage("Welcome to my hut! What could I brew for you today?", shopItems);
+			Debug.debug("selection", selection);
+			if (selection == null)
+				shop();
+			selection = selection.substring(0, selection.indexOf("(") - 1);
+			Debug.debug("selection", selection);
+			location = getLocation(matrix, selection);
+			Debug.debug("locaiton", location);
+			cost = Integer.parseInt(matrix[location][6]);
+			Debug.debug("cost", cost);
+			if (cost > player.getGold())
+				PopUp.textInput("You don't have enough gold.");
+			else {
+				player.subtractGold(cost);
+				//Add in potion system
+				PopUp.textMessage("hehe enojoy");
+			}
 			break;
 		case 0:
 			gameMenu();
