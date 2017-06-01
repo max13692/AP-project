@@ -1,0 +1,8 @@
+["Worm"],
+["Eagle"],
+["Wolf"],
+["Bear"],
+["Baby Dragon"],
+["Ghost"],
+["Gryphin"],
+["Ice Dragon"]

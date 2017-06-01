@@ -41,13 +41,23 @@ public class Player {
 		return true;
 	}
 
+	public boolean subtractHealth(int health) {
+		if (this.health == 0 || health <= 0)
+			return false;
+		this.health -= health;
+		if (this.health < 0)
+			this.health = 0;
+		return true;
+	}
+
 	public String takeDamage(int health) {
-		Debug.debug("health",health);
-		if (this.health == 0 || health <= 0){
+		Debug.debug("health", health);
+		if (this.health == 0 || health <= 0) {
 			Debug.error("Error with takeDamage");
 			return null;
 		}
-		double damage = health - Math.round((Math.random() * getDefualtItem().getDefence() + 1));
+		double damage = health
+				- Math.round((Math.random() * getDefualtItem().getDefence() + 1));
 		this.health -= damage;
 		if (this.health < 0)
 			this.health = 0;
@@ -150,8 +160,9 @@ public class Player {
 		if (exp <= 0)
 			return false;
 		this.exp += exp;
-		if (exp >= getRequiredExp()) {
+		while (exp >= getRequiredExp()) {
 			level++;
+			PopUp.textMessage("You have leveled up to level " + level + "!");
 			exp -= getRequiredExp();
 		}
 		return true;
@@ -207,4 +218,5 @@ public class Player {
 	public String toString() {
 		return playerName + " (level: " + level + ")";
 	}
+
 }

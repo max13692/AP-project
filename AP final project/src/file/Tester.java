@@ -11,7 +11,6 @@ public class Tester {
 	}
 
 	private static void test() {
-
 	}
 	
 	public static void start() {

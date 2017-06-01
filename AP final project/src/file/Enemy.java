@@ -5,7 +5,8 @@ public class Enemy {
 	private double health, attack, defense;
 	private int level;
 
-	public Enemy(String name, double health, double attack, double defense, int level) {
+	public Enemy(String name, double health, double attack, double defense,
+			int level) {
 		this.name = name;
 		this.health = health;
 		this.attack = attack;
@@ -24,8 +25,8 @@ public class Enemy {
 	public String takeDamamge(double amount) {
 		if (amount >= 0)
 			return null;
-		double damage = amount-Math.round((Math.random() * (defense+1)));
-		health -= damage; 
+		double damage = amount - Math.round((Math.random() * (defense + 1)));
+		health -= damage;
 		return "You hit " + name + " for " + damage;
 	}
 
