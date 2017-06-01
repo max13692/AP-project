@@ -135,11 +135,9 @@ public class Player {
 	}
 
 	public boolean addGold(int gold) {
-		if (this.gold == 100 || gold <= 0)
+		if (gold <= 0)
 			return false;
 		this.gold += gold;
-		if (this.gold > 100)
-			this.gold = 100;
 		return true;
 	}
 

@@ -13,8 +13,8 @@ public class Game {
 	}
 
 	private static void gameMenu() {
-		int game = PopUp.buttonMessage("What do you want to do?", new String[] {
-				"Quit", "View Stats", "Open Shop", "Actions" });
+		int game = PopUp.buttonMessage("What do you want to do?",
+				new String[] { "Quit", "View Stats", "Open Shop", "Actions" });
 		Debug.debug("game", game);
 		switch (game) {
 		case -1:
@@ -58,12 +58,12 @@ public class Game {
 		switch (menuNum) {
 		case 1:
 			int stats = PopUp.buttonMessage(
-					"Health:  " + getBar((int) player.getHealth())
-							+ "\nHunger: " + getBar((int) player.getHunger())
-							+ "\nThirst:   " + getBar((int) player.getHunger())
-							+ "\nSanity:   " + getBar((int) player.getSanity())
-							+ "\nWeapon: " + player.getDefualtItem(), "stats",
-					new String[] { "Change wepeon", "Go back" });
+					"--------------" + player + "--------------" + "\nExp: " + player.getExp() + "/"
+							+ player.getRequiredExp() + "\nHealth:  " + getBar((int) player.getHealth()) + "\nHunger: "
+							+ getBar((int) player.getHunger()) + "\nThirst:   " + getBar((int) player.getHunger())
+							+ "\nSanity:   " + getBar((int) player.getSanity()) + "\nWeapon: " + player.getDefualtItem()
+							+ "\nGold: " + player.getGold() + "g",
+					"stats", new String[] { "Change wepeon", "Go back" });
 			Debug.debug("stats", stats);
 			switch (stats) {
 			case -1:
@@ -90,8 +90,7 @@ public class Game {
 			String list[] = new String[player.getItems().size()];
 			for (int i = 0; i < player.getItems().size(); i++)
 				list[i] = player.getItem(i).toString();
-			String item = PopUp.dropDownMessage(
-					"Choose a weapon to use as your main weapon.", list);
+			String item = PopUp.dropDownMessage("Choose a weapon to use as your main weapon.", list);
 			for (int i = 0; i < list.length; i++)
 				if (list[i].equals(item)) {
 					player.setDefaultItem(i);
@@ -137,18 +136,13 @@ public class Game {
 
 	private static void shop() {
 		String matrix[][] = Save.getMatrixFromFile("Data/shop.txt");
-		int shop = PopUp
-				.buttonMessage(
-						"Welcome to the shopping district. Where would you like to shop?",
-						new String[] { "Go Back", "Witch Hut", "Bar",
-								"Grocery Store", "Weapon Shop" });
+		int shop = PopUp.buttonMessage("Welcome to the shopping district. Where would you like to shop?",
+				new String[] { "Go Back", "Witch Hut", "Bar", "Grocery Store", "Weapon Shop" });
 		Debug.debug("shop", shop);
 		switch (shop) {
 		case 4:
 			String shopItems[] = getShopData(matrix, "I");
-			String selection = PopUp.dropDownMessage(
-					"Welcome to the weapons shop. What can I get for you?",
-					shopItems);
+			String selection = PopUp.dropDownMessage("Welcome to the weapons shop. What can I get for you?", shopItems);
 			Debug.debug("selection", selection);
 			if (selection == null)
 				shop();
@@ -158,12 +152,7 @@ public class Game {
 			ArrayList<Item> playerWeapons = player.getItems();
 			boolean hasWeapon = false;
 			for (int i = 0; i < playerWeapons.size(); i++)
-				if (playerWeapons
-						.get(i)
-						.toString()
-						.substring(
-								0,
-								playerWeapons.get(i).toString().indexOf("(") - 1)
+				if (playerWeapons.get(i).toString().substring(0, playerWeapons.get(i).toString().indexOf("(") - 1)
 						.equals(selection)) {
 					hasWeapon = true;
 					break;
@@ -177,9 +166,8 @@ public class Game {
 				PopUp.textInput("You already have this weapon.");
 			else {
 				player.subtractGold(cost);
-				player.addItem(new Item(matrix[location][1], Double
-						.parseDouble(matrix[location][2]), Double
-						.parseDouble(matrix[location][3])));
+				player.addItem(new Item(matrix[location][1], Double.parseDouble(matrix[location][2]),
+						Double.parseDouble(matrix[location][3])));
 				PopUp.textMessage("Weapon Bought");
 			}
 			shop();
@@ -217,53 +205,41 @@ public class Game {
 			gameMenu();
 			break;
 		case 1:
+			Debug.debug("Going for a walk.");
 			int ran = (int) (Math.random() * 6) + 1;
+			Debug.debug("ran", ran);
 			PopUp.textMessage("You went on a walk for " + ran + " hours.");
 			int random = (int) (ran * (Math.random() * 6) + 1);
-			double gold = Math.random() + 1;
-			if (random >= 0 && random < 6) {
+			Debug.debug("random", random);
+			if (random >= 0 && random < 5) {
 				PopUp.textMessage("You didn't find anything...Sorry.");
-			} else if (random >= 6 && random < 12) {
-				PopUp.textMessage("You found " + (int) (gold * random)
-						+ " gold.");
-				player.addGold((int) (gold * random));
-			} else if (random >= 12 && random < 18) {
-				PopUp.textMessage("You found " + (int) (gold * random)
-						+ " gold.");
-				player.addGold((int) (gold * random));
-				PopUp.textMessage("You also get " + (int) ((gold * random) / 2)
-						+ " experience.");
-				player.addExp((int) ((gold * random) / 2));
-				PopUp.textMessage("You got stung by a bee -" + random / 2
-						+ " health");
-				player.subtractHealth(random / 2);
-			} else if (random >= 18 && random < 24) {
-				PopUp.textMessage("You found " + (int) (gold * random)
-						+ " gold.");
-				player.addGold((int) (gold * random));
-				PopUp.textMessage("You also get " + (int) ((gold * random) / 2)
-						+ " experience.");
-				player.addExp((int) ((gold * random) / 2));
-				// fight weak enemy
-			} else if (random >= 24 && random < 30) {
-				PopUp.textMessage("You found " + (int) (gold * random)
-						+ " gold.");
-				player.addGold((int) (gold * random));
-				PopUp.textMessage("You also get " + (int) ((gold * random) / 2)
-						+ " experience.");
-				player.addExp((int) ((gold * random) / 2));
-				// fight enemy
-				// find random food or drink
-			} else if (random >= 30 && random <= 36) {
-				PopUp.textMessage("You found " + (int) (gold * random) * 2
-						+ " gold.");
-				player.addGold((int) (gold * random));
-				PopUp.textMessage("You also get " + (int) ((gold * random) / 2)
-						+ " experience.");
-				player.addExp((int) ((gold * random) / 2));
-				// fight enemy
-				// find random shop item
+			} else {
+				if (random >= 5 && random < 30) {
+					double gold = Math.random() + 1;
+					Debug.debug("gold", gold);
+					PopUp.textMessage("You found " + (int) (gold * random) + " gold.");
+					player.addGold(((int) (gold * random)));
+				}
+				if (random >= 12 && random <= 36) {
+					double exp = Math.random() + 1;
+					Debug.debug("exp", exp);
+					PopUp.textMessage("You also get " + (int) ((exp * random) / 2) + " experience.");
+					player.addExp((int) ((exp * random) / 2));
+				}
+				if (random <= 5 && random < 18) {
+					PopUp.textMessage("You got stung by a bee -" + random / 2 + " health");
+					player.subtractHealth(random / 2);
+				} else if (random >= 18 && random < 24) {
+					// Fight week enemy
+				} else if (random >= 24 && random < 30) {
+					// fight enemy
+					// find random food or drink
+				} else if (random >= 30 && random <= 36) {
+					// fight enemy
+					// find random shop item
+				}
 			}
+
 			gameMenu();
 			break;
 		case 2:
