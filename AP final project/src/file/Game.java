@@ -13,7 +13,7 @@ public class Game {
 	}
 
 	private static void gameMenu() {
-		int game = PopUp.buttonMessage("What do you want to do?",
+		int game = PopUp.buttonMessage("-----Day: " + player.getTime().getDay() + "   " +player.getTime() + "-----"+"\nWhat do you want to do?",
 				new String[] { "Quit", "View Stats", "Open Shop", "Actions" });
 		Debug.debug("game", game);
 		switch (game) {
@@ -45,10 +45,12 @@ public class Game {
 	}
 
 	private static String getBar(int amount) {
-		String bar = "";
+		if(amount <= 0)
+			return "";
 		final char BAR_CHAR = '|';
+		String bar = BAR_CHAR+"";
 		final int AMOUNT_PER_CHAR = 5;
-		for (int i = 0; i < amount / AMOUNT_PER_CHAR; i++)
+		for (int i = 1; i < amount / AMOUNT_PER_CHAR; i++)
 			bar += BAR_CHAR + "";
 		return bar;
 	}
@@ -266,6 +268,8 @@ public class Game {
 			int ran = (int) (Math.random() * 6) + 1;
 			Debug.debug("ran", ran);
 			PopUp.textMessage("You went on a walk for " + ran + " hours.");
+			player.getTime().addTime(ran);
+			player.subtractSanity(ran * 2);
 			int random = (int) (ran * (Math.random() * 6) + 1);
 			Debug.debug("random", random);
 			if (random >= 0 && random < 5) {
@@ -321,6 +325,11 @@ fight(2);
 			Debug.debug("enemyHealth",enemy.getHealth());
 			Debug.debug("playerHealth",player.getHealth());
 		}
+		if(enemy.isDead())
+			PopUp.textMessage("You killed " + enemy + "!");
+		if(player.isDead())
+			PopUp.textMessage("YOU LOSE!!!!");
+		//Get exp 
 	}
 	private static void quitGame() {
 		Debug.debug("Closing game...");

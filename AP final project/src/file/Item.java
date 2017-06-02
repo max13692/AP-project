@@ -1,16 +1,17 @@
 package file;
 
+import javax.security.auth.Subject;
+
 public class Item {
 	private String name;
 	private double attack, defence;
 
 	public Item(String[] data) {
-		try{
-		this.name = data[0];
-		this.attack = Integer.parseInt(data[1]);
-		this.defence = Integer.parseInt(data[2]);
-		}
-		catch(NumberFormatException e){
+		try {
+			this.name = data[0];
+			this.attack = Integer.parseInt(data[1]);
+			this.defence = Integer.parseInt(data[2]);
+		} catch (NumberFormatException e) {
 			Debug.error("Error trying to initialize item.");
 			Debug.error(e.getMessage());
 		}
@@ -20,6 +21,14 @@ public class Item {
 		this.name = name;
 		this.attack = attack;
 		this.defence = defence;
+	}
+
+	public Item(String data) {
+		this.name = data.substring(0, data.indexOf('(') - 1);
+		data = data.replace("attack: ", "!").replace(" defence: " , "@");
+		data = data.substring(data.indexOf("!"));
+		this.attack = Double.parseDouble(data.substring(data.indexOf("!")+1,data.indexOf("@")));
+		this.defence = Double.parseDouble(data.substring(data.indexOf("@")+1).replace(")", ""));
 	}
 
 	public double getAttack() {

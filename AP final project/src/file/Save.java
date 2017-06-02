@@ -53,7 +53,6 @@ public class Save {
 			f2.write(text);
 			f2.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 

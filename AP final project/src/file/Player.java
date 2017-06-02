@@ -23,6 +23,9 @@ public class Player {
 		items.add(new Item("Wood sword", 1, 1));
 		defaultItem = 0;
 	}
+	public Player(String[][] data){
+		
+	}
 
 	public Time getTime() {
 		return time;
@@ -211,6 +214,7 @@ public class Player {
 	}
 
 	public String[][] getData() {
+		String matrix[][] = new String[11][30];
 		return null;
 	}
 
