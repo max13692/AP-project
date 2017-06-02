@@ -72,24 +72,18 @@ Debug.debug("game", game);
 			Debug.debug("stats", stats);
 			switch (stats) {
 			case -1:
-
+				quitGame();
 				break;
 			case 0:
-
+				userMenu(2);
 				break;
 			case 1:
-
+				gameMenu();
 				break;
 			default:
 
 				break;
 			}
-			if (stats == -1)
-				quitGame();
-			else if (stats == 0)
-				userMenu(2);
-			else if (stats == 1)
-				gameMenu();
 			break;
 		case 2:
 			String list[] = new String[player.getItems().size()];
@@ -181,9 +175,9 @@ Debug.debug("game", game);
 			location = getLocation(matrix, selection);
 			cost = Integer.parseInt(matrix[location][4]);
 			if (cost > player.getGold())
-				PopUp.textInput("You don't have enough gold.");
+				PopUp.textMessage("You don't have enough gold.");
 			else if (hasWeapon)
-				PopUp.textInput("You already have this weapon.");
+				PopUp.textMessage("You already have this weapon.");
 			else {
 				player.subtractGold(cost);
 				player.addItem(new Item(matrix[location][1], Double
@@ -207,7 +201,7 @@ Debug.debug("game", game);
 			cost = Integer.parseInt(matrix[location][3]);
 			Debug.debug("cost", cost);
 			if (cost > player.getGold())
-				PopUp.textInput("You don't have enough gold.");
+				PopUp.textMessage("You don't have enough gold.");
 			else {
 				player.subtractGold(cost);
 				player.addHunger(Integer.parseInt(matrix[location][2]));
@@ -230,7 +224,7 @@ Debug.debug("game", game);
 			cost = Integer.parseInt(matrix[location][3]);
 			Debug.debug("cost", cost);
 			if (cost > player.getGold())
-				PopUp.textInput("You don't have enough gold.");
+				PopUp.textMessage("You don't have enough gold.");
 			else {
 				player.subtractGold(cost);
 				player.addThirst(Integer.parseInt(matrix[location][2]));
@@ -252,7 +246,7 @@ Debug.debug("game", game);
 			cost = Integer.parseInt(matrix[location][6]);
 			Debug.debug("cost", cost);
 			if (cost > player.getGold())
-				PopUp.textInput("You don't have enough gold.");
+				PopUp.textMessage("You don't have enough gold.");
 			else {
 				player.subtractGold(cost);
 				player.addHealth(Integer.parseInt(matrix[location][2]));
@@ -268,8 +262,9 @@ Debug.debug("game", game);
 		case -1:
 			quitGame();
 		default:
-			break;
+			break;	
 		}
+		gameMenu();
 	}
 
 	private static void actions() {
@@ -332,24 +327,34 @@ Debug.debug("game", game);
 			Debug.debug("Going to sleep");
 			int sleepHours = (int) ((Math.random() * player.getTime()
 					.getHours()) / 3);
+			Debug.debug("sleepHours", sleepHours);
 			int ran2 = (int) (Math.random() * 3);
-			if (sleepHours >= 7) {
+			Debug.debug("ran2", ran2);
+			if (sleepHours >= 6) {
 				PopUp.textMessage("You slept really well.");
 				player.addSanity(sleepHours * ran2);
-			} else if (sleepHours < 7 && sleepHours >= 5) {
+				player.getTime().addTime(sleepHours);
+			} else if (sleepHours < 6 && sleepHours >= 4) {
 				PopUp.textMessage("You slept ok.");
 				player.addSanity(sleepHours * ran2);
+				player.getTime().addTime(sleepHours);
 			} else {
 				PopUp.textMessage("You didn't sleep well.");
 				player.addSanity((int) (sleepHours * ran2) / 2);
-
+				player.getTime().addTime(sleepHours);
 			}
-
+			gameMenu();
 			break;
 		case 3:
-
+			String[] food = {"Berries", "Raw Meat", "Apple", "Banana", "Cooked Meat"};
+			int ran3 = (int)(Math.random()*5);
+			PopUp.textMessage("You found some " + food[ran3] + " and ate it");
+			player.addHunger(ran3*5);
+			gameMenu();
 			break;
-
+		default:
+			Debug.debug("Error had happened and default was run...");
+			gameMenu();
 		}
 	}
 
@@ -373,11 +378,12 @@ Debug.debug("game", game);
 			Debug.debug("enemyHealth", enemy.getHealth());
 			Debug.debug("playerHealth", player.getHealth());
 		}
-		if(enemy.isDead())
+		if(enemy.isDead()) {
 			PopUp.textMessage("You killed " + enemy + "!");
+		player.addExp((int)(enemy.getLevel()*Math.random()*5));
+		}
 		if(player.isDead())
 			PopUp.textMessage("YOU LOSE!!!!");
-		//Get exp 
 	}
 
 	private static void quitGame() {

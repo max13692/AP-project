@@ -18,6 +18,7 @@ public class Player {
 		sanity = 100;
 		thirst = 100;
 		gold = 100;
+		level = 1;
 		time = new Time();
 		items = new ArrayList<Item>();
 		items.add(new Item("Wood sword", 1, 1));
@@ -162,10 +163,10 @@ public class Player {
 		if (exp <= 0)
 			return false;
 		this.exp += exp;
-		while (exp >= getRequiredExp()) {
+		while (this.exp >= getRequiredExp()) {
 			level++;
 			PopUp.textMessage("You have leveled up to level " + level + "!");
-			exp -= getRequiredExp();
+			this.exp -= getRequiredExp();
 		}
 		return true;
 	}
