@@ -22,10 +22,15 @@ public class Enemy {
 		return health;
 	}
 
+	public double getDefense(){
+		return defense;
+	}
 	public String takeDamamge(double amount) {
-		if (amount >= 0)
+		if (amount <= 0)
 			return null;
-		double damage = amount - Math.round((Math.random() * (defense + 1)));
+		double damage = amount - (int)((Math.random() * (defense)));
+		if(damage < 0)
+			damage = 0;
 		health -= damage;
 		return "You hit " + name + " for " + damage;
 	}

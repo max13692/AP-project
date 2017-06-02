@@ -50,14 +50,15 @@ public class Player {
 		return true;
 	}
 
-	public String takeDamage(int health) {
+	public String takeDamage(double health) {
 		Debug.debug("health", health);
 		if (this.health == 0 || health <= 0) {
 			Debug.error("Error with takeDamage");
 			return null;
 		}
-		double damage = health
-				- Math.round((Math.random() * getDefualtItem().getDefence() + 1));
+		double damage = health - (int)((Math.random() * getDefualtItem().getDefence() + 1));
+		if(damage < 0)
+			damage = 0;
 		this.health -= damage;
 		if (this.health < 0)
 			this.health = 0;

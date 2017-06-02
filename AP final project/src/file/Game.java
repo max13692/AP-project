@@ -287,12 +287,12 @@ public class Game {
 					PopUp.textMessage("You got stung by a bee -" + random / 2 + " health");
 					player.subtractHealth(random / 2);
 				} else if (random >= 18 && random < 24) {
-					// Fight week enemy
+					fight(1);
 				} else if (random >= 24 && random < 30) {
-					// fight enemy
+fight(2);
 					// find random food or drink
 				} else if (random >= 30 && random <= 36) {
-					// fight enemy
+					fight(3);
 					// find random shop item
 				}
 			}
@@ -308,7 +308,20 @@ public class Game {
 
 		}
 	}
-
+	private static void fight(int difficulty){
+		String names[][] = Save.getMatrixFromFile("Data/enemies.txt");
+		Enemy enemy = new Enemy(names[(int)(Math.random()*names.length)][0],(int) (Math.random() * player.getLevel() * difficulty * 2)+1, (int) (Math.random() * player.getLevel() * difficulty)+1, (int) (Math.random() * player.getLevel() * difficulty)+1, (int) (Math.random() * player.getLevel()) + difficulty);
+		Debug.debug("enemy", enemy);
+		PopUp.textMessage("You have incountered: " + enemy + "\nHealth: " + getBar((int)enemy.getHealth()) + "\nAttack: " + enemy.getAttack() + " Defence: " + enemy.getDefense());
+		while(!player.isDead() && !enemy.isDead()){
+			PopUp.textMessage(enemy.takeDamamge(player.getDefualtItem().getAttack()));
+			if(enemy.isDead())
+				break;
+			PopUp.textMessage(player.takeDamage(enemy.getAttack()));
+			Debug.debug("enemyHealth",enemy.getHealth());
+			Debug.debug("playerHealth",player.getHealth());
+		}
+	}
 	private static void quitGame() {
 		Debug.debug("Closing game...");
 		Debug.debug("Saving game...");

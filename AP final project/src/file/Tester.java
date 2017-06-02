@@ -53,7 +53,8 @@ public class Tester {
 			int saveNum = Integer.parseInt(text.substring(5, 6));
 			Debug.debug("saveNum", saveNum);
 			String name = PopUp.textInput("What's your name?");
-			if (name != null)
+			Debug.debug((name.trim().equals(""))+"");
+			if (!(name == null || name.trim().equals("")))
 				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()));
 			else
 				start();
