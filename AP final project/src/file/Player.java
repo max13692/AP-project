@@ -35,6 +35,7 @@ public class Player {
 		level = Integer.parseInt(data[7][0]);
 		exp = Integer.parseInt(data[8][0]);
 		gold = Integer.parseInt(data[9][0]);
+		items = new ArrayList<Item>();
 		for(int i = 0; i < data[10].length;i++){
 			if(data[10][i] == null)
 				break;
