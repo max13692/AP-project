@@ -11,7 +11,7 @@ public class Time {
 		minutes = 30;
 	}
 
-	public String getTime() {
+	public String toString() {
 		if (hours <= 12)
 			return hours + ":" + minutes + " am";
 		return hours - 12 + ":" + minutes + " pm";
@@ -20,7 +20,11 @@ public class Time {
 	public int getDay() {
 		return days;
 	}
-
+	
+	public int getHours() {
+		return hours;
+	}
+	
 	private void updateTime() {
 		while (minutes > 60) {
 			minutes -= 60;

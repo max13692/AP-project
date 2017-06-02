@@ -24,8 +24,8 @@ public class Player {
 		defaultItem = 0;
 	}
 
-	public String getTime() {
-		return time.getTime();
+	public Time getTime() {
+		return time;
 	}
 
 	public boolean isDead() {
