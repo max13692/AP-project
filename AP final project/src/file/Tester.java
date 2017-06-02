@@ -1,5 +1,7 @@
 package file;
 
+import java.sql.Savepoint;
+
 public class Tester {
 	public static void main(String args[]) {
 		Debug.debug("Starting test");
@@ -52,12 +54,17 @@ public class Tester {
 		if (text != null) {
 			int saveNum = Integer.parseInt(text.substring(5, 6));
 			Debug.debug("saveNum", saveNum);
+			if(Save.getSaveText(saveNum).contains("Empty")){
 			String name = PopUp.textInput("What's your name?");
 			Debug.debug((name.trim().equals(""))+"");
 			if (!(name == null || name.trim().equals("")))
-				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()));
+				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()),saveNum);
 			else
 				start();
+			}
+			else{
+				Game.startGame(new Player(Save.getMatrixFromFile("saves/slot"+saveNum+".txt")), saveNum);
+			}
 		} else
 			start();
 	}
@@ -79,11 +86,11 @@ public class Tester {
 		}
 	}
 
-	public static void tutorial(String name) {
+	public static void tutorial(String name,int saveNum) {
 		int selection = PopUp.buttonMessage("Have you played before " + name + "? (and remeber how to play?)",
 				new String[] { "Yes", "No" });
 		if (selection == 0) {
-			Game.startGame(new Player(name));
+			Game.startGame(new Player(name),saveNum);
 		} else {
 			Debug.debug("Opening tutorial...");
 			String[][] tutorial = Save.getMatrixFromFile("Data/tutorial.txt");
@@ -104,7 +111,7 @@ public class Tester {
 					System.exit(0);
 				}
 			}
-			Game.startGame(new Player(name));
+			Game.startGame(new Player(name),saveNum);
 		}
 	}
 }

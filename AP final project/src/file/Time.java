@@ -11,6 +11,14 @@ public class Time {
 		minutes = 30;
 	}
 
+	public Time(String data) {
+		days = Integer.parseInt(data.substring(0, data.indexOf(",")));
+		data = data.substring(data.indexOf(",") + 1);
+		hours = Integer.parseInt(data.substring(0, data.indexOf(",")));
+		data = data.substring(data.indexOf(",") + 1);
+		minutes = Integer.parseInt(data);
+	}
+
 	public String toString() {
 		if (hours <= 12)
 			return hours + ":" + minutes + " am";
@@ -20,11 +28,11 @@ public class Time {
 	public int getDay() {
 		return days;
 	}
-	
+
 	public int getHours() {
 		return hours;
 	}
-	
+
 	private void updateTime() {
 		while (minutes > 60) {
 			minutes -= 60;
@@ -47,7 +55,11 @@ public class Time {
 		this.hours += hours;
 		updateTime();
 	}
-	
+
+	public String getData() {
+		return days + "," + hours + "," + minutes;
+	}
+
 	public void addTime(int hours, int minutes) {
 		this.hours += hours;
 		this.minutes += minutes;

@@ -1,6 +1,5 @@
 package file;
 
-import javax.security.auth.Subject;
 
 public class Item {
 	private String name;
