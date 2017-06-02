@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class Game {
 	public static Player player = null;
-
-	public static void startGame(Player p) {
+private static int save;
+	public static void startGame(Player p, int saveNum) {
+		save = saveNum;
 		player = p;
 		Debug.debug("player", player);
 		Debug.debug("Starting game.");
@@ -389,6 +390,7 @@ Debug.debug("game", game);
 	private static void quitGame() {
 		Debug.debug("Closing game...");
 		Debug.debug("Saving game...");
+		Save.saveMatrix("saves/slot"+save+".txt",player.getData());
 		Debug.debug("Finnished saving game.");
 		Debug.debug("Goodbye");
 		System.exit(0);

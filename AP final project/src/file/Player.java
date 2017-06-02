@@ -24,8 +24,24 @@ public class Player {
 		items.add(new Item("Wood sword", 1, 1));
 		defaultItem = 0;
 	}
-	public Player(String[][] data){
-		
+
+	public Player(String[][] data) {
+		playerName = data[0][0];
+		time = new Time(data[1][0]);
+		health = Double.parseDouble(data[2][0]);
+		hunger = Double.parseDouble(data[3][0]);
+		sanity = Double.parseDouble(data[4][0]);
+		thirst = Double.parseDouble(data[5][0]);
+		defaultItem = Integer.parseInt(data[6][0]);
+		level = Integer.parseInt(data[7][0]);
+		exp = Integer.parseInt(data[8][0]);
+		gold = Integer.parseInt(data[9][0]);
+		items = new ArrayList<Item>();
+		for(int i = 0; i < data[10].length;i++){
+			if(data[10][i] == null)
+				break;
+			items.add(new Item(data[10][i]));
+		}
 	}
 
 	public Time getTime() {
@@ -60,8 +76,8 @@ public class Player {
 			Debug.error("Error with takeDamage");
 			return null;
 		}
-		double damage = health - (int)((Math.random() * getDefualtItem().getDefence() + 1));
-		if(damage < 0)
+		double damage = health - (int) ((Math.random() * getDefualtItem().getDefence() + 1));
+		if (damage < 0)
 			damage = 0;
 		this.health -= damage;
 		if (this.health < 0)
@@ -216,7 +232,19 @@ public class Player {
 
 	public String[][] getData() {
 		String matrix[][] = new String[11][30];
-		return null;
+		matrix[0][0] = playerName;
+		matrix[1][0] = time.getData() + "";
+		matrix[2][0] = health + "";
+		matrix[3][0] = hunger + "";
+		matrix[4][0] = sanity + "";
+		matrix[5][0] = thirst +"";
+		matrix[6][0] = defaultItem +"";
+		matrix[7][0] = level + "";
+		matrix[8][0] = exp + "";
+		matrix[9][0] = gold + "";
+		for(int i = 0; i < items.size();i++)
+			matrix[10][i] = items.get(i).toString();
+		return matrix;
 	}
 
 	public String toString() {
