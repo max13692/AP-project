@@ -76,7 +76,7 @@ public class Player {
 			Debug.error("Error with takeDamage");
 			return null;
 		}
-		double damage = health - (int) ((Math.random() * getDefualtItem().getDefence() + 1));
+		double damage = health - (int) ((Math.random() * getDefualtItem().getDefense()+ 1));
 		if (damage < 0)
 			damage = 0;
 		this.health -= damage;

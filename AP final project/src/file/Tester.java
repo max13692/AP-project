@@ -1,7 +1,5 @@
 package file;
 
-import java.sql.Savepoint;
-
 public class Tester {
 	public static void main(String args[]) {
 		Debug.debug("Starting test");
@@ -14,7 +12,7 @@ public class Tester {
 
 	private static void test() {
 	}
-	
+
 	public static void start() {
 		Debug.debug("Opening Start menu...");
 		int start = PopUp.buttonMessage("Welcome to the game", new String[] { "Extra", "Close", "Help", "Start" });
@@ -35,7 +33,7 @@ public class Tester {
 			System.exit(0);
 			break;
 		case 0:
-			
+			whipeData();
 			break;
 		default:
 			Debug.error("Error, 'start' should not be this value. Going back to start...");
@@ -46,6 +44,20 @@ public class Tester {
 
 	}
 
+	public static void whipeData() {
+		String text = PopUp.dropDownMessage("Choose a save:", "Saves",
+				new String[] { Save.getSaveText(1), Save.getSaveText(2), Save.getSaveText(3) });
+		if (text != null) {
+			int saveNum = Integer.parseInt(text.substring(5, 6));
+			Debug.debug("saveNum", saveNum);
+			if (!Save.getSaveText(saveNum).contains("Empty")) {
+				Save.eraseFile("saves/slot" + saveNum + ".txt");
+				PopUp.textMessage("Erased Slot " + saveNum);
+			}
+		}
+		start();
+	}
+
 	public static void startMenu() {
 		Debug.debug("Starting the game.");
 		Debug.debug("Opening saves menu...");
@@ -54,16 +66,15 @@ public class Tester {
 		if (text != null) {
 			int saveNum = Integer.parseInt(text.substring(5, 6));
 			Debug.debug("saveNum", saveNum);
-			if(Save.getSaveText(saveNum).contains("Empty")){
-			String name = PopUp.textInput("What's your name?");
-			Debug.debug((name.trim().equals(""))+"");
-			if (!(name == null || name.trim().equals("")))
-				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()),saveNum);
-			else
-				start();
-			}
-			else{
-				Game.startGame(new Player(Save.getMatrixFromFile("saves/slot"+saveNum+".txt")), saveNum);
+			if (Save.getSaveText(saveNum).contains("Empty")) {
+				String name = PopUp.textInput("What's your name?");
+				Debug.debug((name.trim().equals("")) + "");
+				if (!(name == null || name.trim().equals("")))
+					tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()), saveNum);
+				else
+					start();
+			} else {
+				Game.startGame(new Player(Save.getMatrixFromFile("saves/slot" + saveNum + ".txt")), saveNum);
 			}
 		} else
 			start();
@@ -86,11 +97,11 @@ public class Tester {
 		}
 	}
 
-	public static void tutorial(String name,int saveNum) {
+	public static void tutorial(String name, int saveNum) {
 		int selection = PopUp.buttonMessage("Have you played before " + name + "? (and remeber how to play?)",
 				new String[] { "Yes", "No" });
 		if (selection == 0) {
-			Game.startGame(new Player(name),saveNum);
+			Game.startGame(new Player(name), saveNum);
 		} else {
 			Debug.debug("Opening tutorial...");
 			String[][] tutorial = Save.getMatrixFromFile("Data/tutorial.txt");
@@ -111,7 +122,7 @@ public class Tester {
 					System.exit(0);
 				}
 			}
-			Game.startGame(new Player(name),saveNum);
+			Game.startGame(new Player(name), saveNum);
 		}
 	}
 }

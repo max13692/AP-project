@@ -32,7 +32,7 @@ public class Enemy {
 		if(damage < 0)
 			damage = 0;
 		health -= damage;
-		return "You hit " + name + " for " + damage;
+		return "You hit " + name + " for " + damage + "hp";
 	}
 
 	public boolean addHealth(double amount) {
