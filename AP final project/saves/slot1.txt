@@ -8,4 +8,4 @@
 ["1"],
 ["39"],
 ["150"],
-[ ["Wood sword (attack: 1.0 defence: 1.0)","Wood Sword (attack: 1.5 defence: 1.0)"] ]
+[ ["Wood sword (attack: 1.0 defense: 1.0)","Wood Sword (attack: 1.5 defense: 1.0)"] ]
