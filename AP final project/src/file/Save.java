@@ -146,7 +146,7 @@ public class Save {
 		return matrix;
 	}
 
-	public static void eraseFile(String fileName)  {
+	public static void eraseFile(String fileName) {
 		FileWriter f2;
 		try {
 			f2 = new FileWriter(fileName);
@@ -156,6 +156,5 @@ public class Save {
 			e.printStackTrace();
 		}
 
-		
 	}
 }
