@@ -13,7 +13,7 @@ public class Save {
 		if (matrix == null)
 			return "Save " + saveNum + " (Empty)";
 		else
-			return "Save " + saveNum + " (Name " + matrix[0][0] + ")";
+			return "Save " + saveNum + " (Name: " + matrix[0][0] + ")";
 	}
 
 	private static int arrayLength(String arr[]) {
