@@ -99,6 +99,7 @@ public class Player {
 	}
 
 	public boolean subtractHunger(int hunger) {
+		
 		if (this.hunger == 0 || hunger <= 0)
 			return false;
 		this.hunger -= hunger;
@@ -114,6 +115,8 @@ public class Player {
 	public boolean addThirst(int thirst) {
 		if (this.thirst == 100 || thirst <= 0)
 			return false;
+		if (!(time.getHours() > 9 && time.getHours() < 15))
+			thirst *= 2;
 		this.thirst += thirst;
 		if (this.thirst > 100)
 			this.thirst = 100;
@@ -123,6 +126,8 @@ public class Player {
 	public boolean subtractThirst(int thirst) {
 		if (this.thirst == 0 || thirst <= 0)
 			return false;
+		if (time.getHours() > 9 && time.getHours() < 15)
+			thirst *= 2;
 		this.thirst -= thirst;
 		if (this.thirst < 0)
 			this.thirst = 0;
@@ -136,6 +141,8 @@ public class Player {
 	public boolean addSanity(int sanity) {
 		if (this.sanity == 100 || sanity <= 0)
 			return false;
+		if (time.getHours() > 22 || time.getHours() < 5)
+			sanity *= 2;
 		this.sanity += sanity;
 		if (this.sanity > 100)
 			this.sanity = 100;
@@ -145,6 +152,8 @@ public class Player {
 	public boolean subtractSanity(int sanity) {
 		if (this.sanity == 0 || sanity <= 0)
 			return false;
+		if (!(time.getHours() > 22 || time.getHours() < 5))
+			sanity *= 2;
 		this.sanity -= sanity;
 		if (this.sanity < 0)
 			this.sanity = 0;
