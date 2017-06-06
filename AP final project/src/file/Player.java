@@ -104,6 +104,8 @@ public class Player {
 	public boolean addHunger(int hunger) {
 		if (this.hunger == 100 || hunger <= 0)
 			return false;
+		if((time.getHours() > 6 && time.getHours() < 9) || (time.getHours() > 11 && time.getHours() < 13) ||  (time.getHours() > 18 && time.getHours() < 21))
+			hunger *= 2;
 		this.hunger += hunger;
 		if (this.hunger > 100)
 			this.hunger = 100;
@@ -111,9 +113,10 @@ public class Player {
 	}
 
 	public boolean subtractHunger(int hunger) {
-		
 		if (this.hunger == 0 || hunger <= 0)
 			return false;
+		if(!((time.getHours() > 6 && time.getHours() < 9) || (time.getHours() > 11 && time.getHours() < 13) ||  (time.getHours() > 18 && time.getHours() < 21)))
+			hunger *= 2;
 		this.hunger -= hunger;
 		if (this.hunger < 0)
 			this.hunger = 0;
