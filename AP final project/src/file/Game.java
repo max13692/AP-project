@@ -14,6 +14,13 @@ private static int save;
 	}
 
 	private static void gameMenu() {
+		if(player.isDead() == true) {
+			Debug.debug("isDead", player.isDead());
+			PopUp.textMessage("You died from " + "");
+			Save.eraseFile("saves/slot"+save+".txt");
+			Tester.start();
+		}
+		else {
 		int game = PopUp.buttonMessage("-----Day: " + player.getTime().getDay() + "   " +player.getTime() + "-----"+"\nWhat do you want to do?",
 				new String[] { "Quit", "View Stats", "Open Shop", "Actions" });
 Debug.debug("game", game);
@@ -42,6 +49,7 @@ Debug.debug("game", game);
 		default:
 			Debug.debug("Invalid selection...");
 			gameMenu();
+		}
 		}
 	}
 
@@ -295,6 +303,7 @@ Debug.debug("game", game);
 			} else {
 				if (random >= 5 && random < 30) {
 					double gold = Math.random() + 1;
+					player.subtractHunger(ran/2);
 					Debug.debug("gold", gold);
 					PopUp.textMessage("You found " + (int) (gold * random)
 							+ " gold.");
@@ -302,6 +311,7 @@ Debug.debug("game", game);
 				}
 				if (random >= 12 && random <= 36) {
 					double exp = Math.random() + 1;
+					player.subtractThirst(ran/2);
 					Debug.debug("exp", exp);
 					PopUp.textMessage("You also get "
 							+ (int) ((exp * random) / 2) + " experience.");
@@ -326,31 +336,37 @@ Debug.debug("game", game);
 			break;
 		case 2:
 			Debug.debug("Going to sleep");
-			int sleepHours = (int) ((Math.random() * player.getTime()
-					.getHours()) / 3);
+			int sleepHours = (int) (Math.random() * 8);
 			Debug.debug("sleepHours", sleepHours);
 			int ran2 = (int) (Math.random() * 3);
 			Debug.debug("ran2", ran2);
-			if (sleepHours >= 5) {
+			if (sleepHours >= 7) {
 				PopUp.textMessage("You slept really well.");
 				player.addSanity(sleepHours * ran2);
 				player.getTime().addTime(sleepHours);
-			} else if (sleepHours < 5 && sleepHours >= 4) {
+				player.subtractHunger(ran2);
+			} else if (sleepHours < 7 && sleepHours >= 4) {
 				PopUp.textMessage("You slept ok.");
 				player.addSanity(sleepHours * ran2);
 				player.getTime().addTime(sleepHours);
+				player.subtractThirst(ran2);
 			} else {
 				PopUp.textMessage("You didn't sleep well.");
 				player.addSanity((int) (sleepHours * ran2) / 2);
 				player.getTime().addTime(sleepHours);
+				player.subtractThirst(ran2);
+				player.subtractHunger(ran2);
 			}
 			gameMenu();
 			break;
 		case 3:
-			String[] food = {"Berries", "Raw Meat", "Apple", "Banana", "Cooked Meat"};
+			String[] food = {"Berries", "Raw Meat", "Apples", "Bananas", "Cooked Meat"};
 			int ran3 = (int)(Math.random()*5);
-			PopUp.textMessage("You found some " + food[ran3] + " and ate it");
+			Debug.debug("ran3", ran3);
+			PopUp.textMessage("You found some " + food[ran3] + "!");
 			player.addHunger(ran3*5);
+			player.getTime().addTime(0,30);
+			player.subtractThirst(ran3);
 			gameMenu();
 			break;
 		default:
