@@ -49,9 +49,21 @@ public class Player {
 	}
 
 	public boolean isDead() {
-		return health <= 0;
+		return health <= 0 || sanity <= 0 || thirst <= 0 || hunger <= 0;
 	}
 
+	public String getDeathMessage(){
+		if(health <= 0)
+			return "You should have called a docter";
+		if(hunger <= 0)
+			return "You collapsed from lack of food, come one bro.";
+		if(thirst <= 0)
+			return "Bro you could have drunk anything, you died.";
+		if(sanity <= 0)
+			return "You trippin bro, sleep more next time.";
+		Debug.error("error not dead");
+		return null;
+	}
 	public boolean addHealth(int health) {
 		if (this.health == 100 || health <= 0)
 			return false;
