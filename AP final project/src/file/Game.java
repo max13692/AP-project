@@ -331,11 +331,11 @@ Debug.debug("game", game);
 			Debug.debug("sleepHours", sleepHours);
 			int ran2 = (int) (Math.random() * 3);
 			Debug.debug("ran2", ran2);
-			if (sleepHours >= 6) {
+			if (sleepHours >= 5) {
 				PopUp.textMessage("You slept really well.");
 				player.addSanity(sleepHours * ran2);
 				player.getTime().addTime(sleepHours);
-			} else if (sleepHours < 6 && sleepHours >= 4) {
+			} else if (sleepHours < 5 && sleepHours >= 4) {
 				PopUp.textMessage("You slept ok.");
 				player.addSanity(sleepHours * ran2);
 				player.getTime().addTime(sleepHours);

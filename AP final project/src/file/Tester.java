@@ -1,6 +1,5 @@
 package file;
 
-import java.sql.Savepoint;
 
 public class Tester {
 	public static void main(String args[]) {
@@ -71,8 +70,8 @@ public class Tester {
 
 	public static void help() {
 		Debug.debug("Starting help method...");
-		String issues[] = { "issue 1", "issue 2", "issue 3" };
-		String solutions[] = { "solution 1", "solution 2", "solution 3" };
+		String issues[] = { "Data won't load.", "Can't start game.", "Tutorial won't work." };
+		String solutions[] = { "Try to erase data in the extra button.", "Try closing out and reopening the game file.", "Try closing out and reopen the game." };
 		String problem = PopUp.dropDownMessage("What do you need help with?", "Help", issues);
 		Debug.debug("problem", problem);
 		if (problem != null) {
