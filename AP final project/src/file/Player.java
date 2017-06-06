@@ -37,8 +37,8 @@ public class Player {
 		exp = Integer.parseInt(data[8][0]);
 		gold = Integer.parseInt(data[9][0]);
 		items = new ArrayList<Item>();
-		for(int i = 0; i < data[10].length;i++){
-			if(data[10][i] == null)
+		for (int i = 0; i < data[10].length; i++) {
+			if (data[10][i] == null)
 				break;
 			items.add(new Item(data[10][i]));
 		}
@@ -76,7 +76,7 @@ public class Player {
 			Debug.error("Error with takeDamage");
 			return null;
 		}
-		double damage = health - (int) ((Math.random() * getDefualtItem().getDefence() + 1));
+		double damage = health - (int) ((Math.random() * getDefualtItem().getDefense() + 1));
 		if (damage < 0)
 			damage = 0;
 		this.health -= damage;
@@ -99,6 +99,7 @@ public class Player {
 	}
 
 	public boolean subtractHunger(int hunger) {
+		
 		if (this.hunger == 0 || hunger <= 0)
 			return false;
 		this.hunger -= hunger;
@@ -114,6 +115,8 @@ public class Player {
 	public boolean addThirst(int thirst) {
 		if (this.thirst == 100 || thirst <= 0)
 			return false;
+		if (!(time.getHours() > 9 && time.getHours() < 15))
+			thirst *= 2;
 		this.thirst += thirst;
 		if (this.thirst > 100)
 			this.thirst = 100;
@@ -123,6 +126,8 @@ public class Player {
 	public boolean subtractThirst(int thirst) {
 		if (this.thirst == 0 || thirst <= 0)
 			return false;
+		if (time.getHours() > 9 && time.getHours() < 15)
+			thirst *= 2;
 		this.thirst -= thirst;
 		if (this.thirst < 0)
 			this.thirst = 0;
@@ -136,6 +141,8 @@ public class Player {
 	public boolean addSanity(int sanity) {
 		if (this.sanity == 100 || sanity <= 0)
 			return false;
+		if (time.getHours() > 22 || time.getHours() < 5)
+			sanity *= 2;
 		this.sanity += sanity;
 		if (this.sanity > 100)
 			this.sanity = 100;
@@ -145,6 +152,8 @@ public class Player {
 	public boolean subtractSanity(int sanity) {
 		if (this.sanity == 0 || sanity <= 0)
 			return false;
+		if (!(time.getHours() > 22 || time.getHours() < 5))
+			sanity *= 2;
 		this.sanity -= sanity;
 		if (this.sanity < 0)
 			this.sanity = 0;
@@ -231,18 +240,18 @@ public class Player {
 	}
 
 	public String[][] getData() {
-		String matrix[][] = new String[11][30];
+		String matrix[][] = new String[11][20];
 		matrix[0][0] = playerName;
 		matrix[1][0] = time.getData() + "";
 		matrix[2][0] = health + "";
 		matrix[3][0] = hunger + "";
 		matrix[4][0] = sanity + "";
-		matrix[5][0] = thirst +"";
-		matrix[6][0] = defaultItem +"";
+		matrix[5][0] = thirst + "";
+		matrix[6][0] = defaultItem + "";
 		matrix[7][0] = level + "";
 		matrix[8][0] = exp + "";
 		matrix[9][0] = gold + "";
-		for(int i = 0; i < items.size();i++)
+		for (int i = 0; i < items.size(); i++)
 			matrix[10][i] = items.get(i).toString();
 		return matrix;
 	}

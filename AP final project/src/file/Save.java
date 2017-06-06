@@ -13,7 +13,7 @@ public class Save {
 		if (matrix == null)
 			return "Save " + saveNum + " (Empty)";
 		else
-			return "Sace " + saveNum + " (Name " + matrix[0][0] + ")";
+			return "Save " + saveNum + " (Name: " + matrix[0][0] + ")";
 	}
 
 	private static int arrayLength(String arr[]) {
@@ -144,5 +144,17 @@ public class Save {
 			for (int j = 0; j < matrix[i].length; j++)
 				matrix[i][j] = tempMatrix[i][j];
 		return matrix;
+	}
+
+	public static void eraseFile(String fileName) {
+		FileWriter f2;
+		try {
+			f2 = new FileWriter(fileName);
+			f2.write("");
+			f2.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

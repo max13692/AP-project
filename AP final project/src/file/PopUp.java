@@ -50,7 +50,8 @@ public class PopUp {
 	public static String textInput(String text) {
 		return (String) JOptionPane.showInputDialog(null, text, DEFAULT_TITLE, DEFUALT_TYPE, null, null, null);
 	}
-	//Creates a blank popup with just text
+
+	// Creates a blank popup with just text
 	public static void textMessage(String text, String title) {
 		JOptionPane.showMessageDialog(null, text, title, DEFUALT_TYPE);
 	}
@@ -58,6 +59,5 @@ public class PopUp {
 	public static void textMessage(String text) {
 		JOptionPane.showMessageDialog(null, text, DEFAULT_TITLE, DEFUALT_TYPE);
 	}
-
 
 }
