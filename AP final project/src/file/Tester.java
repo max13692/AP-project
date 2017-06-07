@@ -67,10 +67,11 @@ public class Tester {
 			Debug.debug("saveNum", saveNum);
 			if(Save.getSaveText(saveNum).contains("Empty")){
 			String name = PopUp.textInput("What's your name?");
-			Debug.debug((name.trim().equals(""))+"");
-			if (!(name == null || name.trim().equals("")))
+
+			if (!(name == null || name.trim().equals(""))){
 				tutorial(name.toUpperCase().charAt(0) + name.toLowerCase().substring(1, name.length()),saveNum);
-			else
+				Debug.debug((name.trim().equals(""))+"");
+			}else
 				start();
 			}
 			else{
