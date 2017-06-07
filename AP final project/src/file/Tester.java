@@ -33,7 +33,7 @@ public class Tester {
 			System.exit(0);
 			break;
 		case 0:
-			
+			eraseFiles();
 			break;
 		default:
 			Debug.error("Error, 'start' should not be this value. Going back to start...");
@@ -44,6 +44,19 @@ public class Tester {
 
 	}
 
+	public static void eraseFiles(){
+		String text = PopUp.dropDownMessage("Choose a save to erase:", "Erase Files",
+				new String[] { Save.getSaveText(1), Save.getSaveText(2), Save.getSaveText(3) });
+		if (text != null) {
+			int saveNum = Integer.parseInt(text.substring(5, 6));
+			Debug.debug("saveNum", saveNum);
+			if(!Save.getSaveText(saveNum).contains("Empty")){
+				Save.eraseFile("saves/slot"+saveNum+".txt");
+				start();
+			}
+		}
+	
+	}
 	public static void startMenu() {
 		Debug.debug("Starting the game.");
 		Debug.debug("Opening saves menu...");
