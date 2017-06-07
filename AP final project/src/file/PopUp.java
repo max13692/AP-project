@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  */
 public class PopUp {
 	// Final title so all pop ups have the same title
-	private static final String DEFAULT_TITLE = "Default Title";
+	private static final String DEFAULT_TITLE = "Survival";
 	private static final int DEFUALT_TYPE = JOptionPane.PLAIN_MESSAGE;
 
 	/*

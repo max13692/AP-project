@@ -342,17 +342,17 @@ Debug.debug("game", game);
 			Debug.debug("ran2", ran2);
 			if (sleepHours >= 7) {
 				PopUp.textMessage("You slept really well.");
-				player.addSanity(sleepHours * ran2);
+				player.addSanity((int) (sleepHours * ran2 * 3));
 				player.getTime().addTime(sleepHours);
 				player.subtractHunger(ran2);
 			} else if (sleepHours < 7 && sleepHours >= 4) {
 				PopUp.textMessage("You slept ok.");
-				player.addSanity(sleepHours * ran2);
+				player.addSanity((int) (sleepHours * ran2 * 2));
 				player.getTime().addTime(sleepHours);
 				player.subtractThirst(ran2);
 			} else {
 				PopUp.textMessage("You didn't sleep well.");
-				player.addSanity((int) (sleepHours * ran2) / 2);
+				player.addSanity((int) (sleepHours * ran2));
 				player.getTime().addTime(sleepHours);
 				player.subtractThirst(ran2);
 				player.subtractHunger(ran2);
