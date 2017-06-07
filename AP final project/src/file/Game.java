@@ -16,7 +16,7 @@ private static int save;
 	private static void gameMenu() {
 		if(player.isDead() == true) {
 			Debug.debug("isDead", player.isDead());
-			PopUp.textMessage("You died from " + "");
+			PopUp.textMessage(player.getDeathMessage());
 			Save.eraseFile("saves/slot"+save+".txt");
 			Tester.start();
 		}
@@ -73,7 +73,7 @@ Debug.debug("game", game);
 							+ player.getExp() + "/" + player.getRequiredExp()
 							+ "\nHealth:  " + getBar((int) player.getHealth())
 							+ "\nHunger: " + getBar((int) player.getHunger())
-							+ "\nThirst:   " + getBar((int) player.getHunger())
+							+ "\nThirst:   " + getBar((int) player.getThirst())
 							+ "\nSanity:   " + getBar((int) player.getSanity())
 							+ "\nWeapon: " + player.getDefualtItem()
 							+ "\nGold: " + player.getGold() + "g", "stats",
@@ -106,18 +106,6 @@ Debug.debug("game", game);
 					break;
 				}
 			userMenu(1);
-			break;
-		case 3:
-			// user menu 3
-			break;
-		case 4:
-			// user menu 4
-			break;
-		case 5:
-			// user menu 5
-			break;
-		case 6:
-			// user menu 6
 			break;
 		default:
 			Debug.error("menuNum", menuNum);
@@ -342,20 +330,20 @@ Debug.debug("game", game);
 			Debug.debug("ran2", ran2);
 			if (sleepHours >= 7) {
 				PopUp.textMessage("You slept really well.");
-				player.addSanity(sleepHours * ran2);
+				player.addSanity(sleepHours * ran2 * 3);
 				player.getTime().addTime(sleepHours);
-				player.subtractHunger(ran2);
+				player.subtractHunger(ran2 * 2);
 			} else if (sleepHours < 7 && sleepHours >= 4) {
 				PopUp.textMessage("You slept ok.");
-				player.addSanity(sleepHours * ran2);
+				player.addSanity(sleepHours * ran2 * 3);
 				player.getTime().addTime(sleepHours);
-				player.subtractThirst(ran2);
+				player.subtractThirst(ran2 * 2);
 			} else {
 				PopUp.textMessage("You didn't sleep well.");
-				player.addSanity((int) (sleepHours * ran2) / 2);
+				player.addSanity((int) (sleepHours * ran2));
 				player.getTime().addTime(sleepHours);
-				player.subtractThirst(ran2);
-				player.subtractHunger(ran2);
+				player.subtractThirst(ran2 * 2);
+				player.subtractHunger(ran2 * 2);
 			}
 			gameMenu();
 			break;

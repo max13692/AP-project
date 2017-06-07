@@ -34,7 +34,7 @@ public class Time {
 	}
 
 	private void updateTime() {
-		while (minutes > 60) {
+		while (minutes >= 60) {
 			minutes -= 60;
 			hours++;
 		}
