@@ -20,9 +20,14 @@ public class Time {
 	}
 
 	public String toString() {
-		if (hours <= 12)
-			return hours + ":" + minutes + " am";
-		return hours - 12 + ":" + minutes + " pm";
+		if(minutes > 0){
+			if (hours <= 12)
+				return hours + ":" + minutes + " am";
+			return hours - 12 + ":" + minutes + " pm";
+		}
+		else if (hours <= 12)
+		return hours + ":" + minutes + "0 am";
+	return hours - 12 + ":" + minutes + "0 pm";
 	}
 
 	public int getDay() {
